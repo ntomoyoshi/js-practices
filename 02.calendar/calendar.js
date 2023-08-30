@@ -4,16 +4,17 @@ import dayjs from "dayjs";
 
 //show関数　引数:year=年、month=月
 function show(year, month) {
+  console.log("      " + month + "月" + " " + year);
   const firstday = new Date(year, month - 1, 1);
   console.log("日 月 火 水 木 金 土");
   //const:変更できない変数 number_of_days:月の日数
-  const number_of_days = 31;
+  const number_of_days = dayjs(firstday).daysInMonth();
   for (let i = 0; i < firstday.getDay(); i++) {
     process.stdout.write("   ");
   }
 
   //let:変更可能な変数　for:number_of_days回繰り返し
-  for (let day = 1; day <= number_of_days; day += 1) {
+  for (let day = 1; day <= number_of_days; day++) {
     //dayが10未満のとき空白を出力
     if (day < 10) {
       process.stdout.write(" ");
@@ -29,8 +30,9 @@ function show(year, month) {
   console.log("");
 }
 
-let year = 2023;
-let month = 8;
+let today = new Date();
+let year = today.getFullYear();
+let month = today.getMonth() + 1;
 
 show(year, month);
 
