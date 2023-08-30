@@ -1,8 +1,17 @@
 #!/usr/bin/env node
+
+import dayjs from "dayjs";
+
 //show関数　引数:year=年、month=月
 function show(year, month) {
+  const firstday = new Date(year, month - 1, 1);
+  console.log("日 月 火 水 木 金 土");
   //const:変更できない変数 number_of_days:月の日数
   const number_of_days = 31;
+  for (let i = 0; i < firstday.getDay(); i++) {
+    process.stdout.write("   ");
+  }
+
   //let:変更可能な変数　for:number_of_days回繰り返し
   for (let day = 1; day <= number_of_days; day += 1) {
     //dayが10未満のとき空白を出力
@@ -13,7 +22,7 @@ function show(year, month) {
     //"" + day + " "    <- これの意味: 長さゼロの文字列(空文字列)に数値のdayを足して文字列にする
     // これでもできるprocess.stdout.write(`${day} `)
     process.stdout.write("" + day + " ");
-    if (day % 7 == 0) {
+    if ((day + firstday.getDay()) % 7 == 0) {
       console.log("");
     }
   }
